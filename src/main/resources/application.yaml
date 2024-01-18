@@ -1,11 +1,17 @@
 text2image:
+  model-path:
+    param-name: "--model-path"
+    value: "C:\\big-files\\test-sbai\\stable-diffusion-v1-5"
+  execution-provider:
+    param-name: "--execution-provider"
+    value: "CPU"
   high-quality:
     inference-steps: 50
     image-size: 1024
   low-quality:
-    inference-steps: 5
-    image-size: 256
+    inference-steps: 10
+    image-size: 512
   negative-text: ""
-  guide-strength: 10.0f
+  guide-strength: 9.0f
   batch-size: 1
   rng-seed: 42
