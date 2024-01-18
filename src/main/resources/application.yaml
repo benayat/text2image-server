@@ -1,0 +1,11 @@
+text2image:
+  high-quality:
+    inference-steps: 50
+    image-size: 1024
+  low-quality:
+    inference-steps: 5
+    image-size: 256
+  negative-text: ""
+  guide-strength: 10.0f
+  batch-size: 1
+  rng-seed: 42

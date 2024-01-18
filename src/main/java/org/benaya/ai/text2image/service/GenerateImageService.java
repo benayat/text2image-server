@@ -3,6 +3,7 @@ package org.benaya.ai.text2image.service;
 import lombok.RequiredArgsConstructor;
 import org.benaya.ai.text2image.exception.NoImageCreatedException;
 import org.benaya.ai.text2image.sd4j.SD4J;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -16,25 +17,41 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GenerateImageService {
     private final SD4J sd4j;
-    private final int defaultNumInferenceSteps = 50;
-    private final int defaultSimpleNumInferenceSteps = 4;
-    private final String emptyNegativeText = "";
-    private final float defaultGuideStrength = 10f;
-    private final int batchSize = 1;
-    private final int defaultImageSize = 512;
-    private final int defaultRngSeed = 42;
+    @Value("${text2image.high-quality.inference-steps}")
+    private int highQualityInferenceSteps;
+    @Value("${text2image.low-quality.inference-steps}")
+    private int lowQualityInferenceSteps = 4;
+    @Value("${text2image.negative-text}")
+    private String negativeText;
+    @Value("${text2image.high-quality.image-size}")
+    private int highQualityImageSize;
+    @Value("${text2image.low-quality.image-size}")
+    private int lowQualityImageSize;
+    @Value("${text2image.guide-strength}")
+    private float guideStrength;
+    @Value("${text2image.batch-size}")
+    private int batchSize;
+    @Value("${text2image.rng-seed}")
+    private int RngSeed;
 
-    public byte[] generateImageBytes(String prompt) {
-        SD4J.ImageSize imageSize = new SD4J.ImageSize(defaultImageSize, defaultImageSize);
-        List<SD4J.SDImage> imageList = sd4j.generateImage(defaultSimpleNumInferenceSteps, prompt, emptyNegativeText, defaultGuideStrength, batchSize, imageSize, defaultRngSeed);
+    public byte[] generateLowQualityImageBytes(String prompt) {
+        BufferedImage image = generateImage(prompt, lowQualityInferenceSteps, lowQualityImageSize);
+        return getByteArrayRepOfImage(image);
+    }
+
+    public byte[] generateHighQualityImageBytes(String prompt) {
+        BufferedImage image = generateImage(prompt, highQualityInferenceSteps, highQualityImageSize);
+        return getByteArrayRepOfImage(image);
+    }
+
+    private BufferedImage generateImage(String prompt, int inferenceSteps, int imageSize) {
+        List<SD4J.SDImage> imageList = sd4j.generateImage(inferenceSteps, prompt, negativeText, guideStrength, batchSize, getImageSize(imageSize), RngSeed);
         if (imageList.isEmpty()) {
             throw new NoImageCreatedException();
         }
-        return getByteArrayRepOfImage(imageList.getFirst().image());
+        return imageList.getFirst().image();
     }
-//    public byte[] generateMultipleImagesBytes(String prompt, int numImages) {
-// implement this
-//    }
+
     private String getStringRepOfImage(BufferedImage image) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
@@ -44,6 +61,11 @@ public class GenerateImageService {
             throw new RuntimeException(e);
         }
     }
+
+    private SD4J.ImageSize getImageSize(int size) {
+        return new SD4J.ImageSize(size, size);
+    }
+
     private byte[] getByteArrayRepOfImage(BufferedImage image) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {

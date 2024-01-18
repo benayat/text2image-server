@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class Controller {
     private final GenerateImageService generateImageService;
-    @GetMapping(value = "/generate", produces = MediaType.IMAGE_PNG_VALUE)
-    public byte[] generate(@RequestParam String prompt) {
-        return generateImageService.generateImageBytes(prompt);
+    @GetMapping(value = "/generate-sample", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] generateLowQualityImage(@RequestParam String prompt) {
+        return generateImageService.generateLowQualityImageBytes(prompt);
     }
+    @GetMapping(value = "/generate-hq", produces = MediaType.IMAGE_PNG_VALUE)
+    public byte[] generateHighQualityImage(@RequestParam String prompt) {
+        return generateImageService.generateHighQualityImageBytes(prompt);
+    }
+
 }
