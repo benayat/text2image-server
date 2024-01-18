@@ -1,10 +1,10 @@
 HELP.md
-ortextensions.dll
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-
+ortextensions.dll
+hs_err_pid34180.log
 
 ### STS ###
 .apt_generated
