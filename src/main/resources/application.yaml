@@ -10,9 +10,9 @@ text2image:
     inference-steps: ${HQ_INFERENCE_STEPS:50}
     image-size: ${HQ_IMAGE_SIZE:1024}
   low-quality:
-    inference-steps: ${LQ_INFERENCE_STEPS:10}
-    image-size: ${LQ_IMAGE_SIZE:1024}
+    inference-steps: ${LQ_INFERENCE_STEPS:15}
+    image-size: ${LQ_IMAGE_SIZE:512}
   negative-text: ""
-  guide-strength: ${GUIDE_STRENGTH:9.0f}
+  guide-strength: ${GUIDE_STRENGTH:10.0f}
   batch-size: 1
   rng-seed: 42

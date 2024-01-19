@@ -8,7 +8,7 @@ RUN chmod +x build_lib.sh && ./build_lib.sh --config Release --update --build --
 RUN mkdir -p /home/app  && cp -rl build/Linux/Release/lib/libortextensions.so /home/app
 WORKDIR /home/app
 RUN chmod +x libortextensions.so
-COPY target/text2image-1.0.0-SNAPSHOT.jar text2image.jar
+COPY target/text2image-1.0.0.jar text2image.jar
 COPY text_tokenizer text_tokenizer
 
 ENTRYPOINT ["java","-jar","text2image.jar"]
