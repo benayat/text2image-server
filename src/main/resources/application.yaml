@@ -1,17 +1,18 @@
 text2image:
   model-path:
     param-name: "--model-path"
-    value: "C:\\big-files\\test-sbai\\stable-diffusion-v1-5"
+    value: ${TEXT2IMAGE_MODEL_PATH:/stable-diffusion-v1-5}
+#    value: "C:\\big-files\\test-sbai\\stable-diffusion-v1-5"
   execution-provider:
-    param-name: "--execution-provider"
-    value: "CPU"
+    param-name: --execution-provider
+    value: ${EXECUTION_PROVIDER:CPU}
   high-quality:
-    inference-steps: 50
-    image-size: 1024
+    inference-steps: ${HQ_INFERENCE_STEPS:50}
+    image-size: ${HQ_IMAGE_SIZE:1024}
   low-quality:
-    inference-steps: 10
-    image-size: 512
+    inference-steps: ${LQ_INFERENCE_STEPS:10}
+    image-size: ${LQ_IMAGE_SIZE:1024}
   negative-text: ""
-  guide-strength: 9.0f
+  guide-strength: ${GUIDE_STRENGTH:9.0f}
   batch-size: 1
   rng-seed: 42
