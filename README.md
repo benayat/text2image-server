@@ -17,7 +17,8 @@
 - get the relevant lib file(for windows, it's ortextensions.dll) and copy to the root of this project.
 
 #### Todo: ####
-- check an option for quzntized model, if any is comming soon - could make great difference in speed for cpu systems.
+- create a spring boot starter from the sd4j package, and make all the auto-closable resources managed as spring beans.
+- check an option for quantized model, if any is coming soon - could make great difference in speed for cpu systems.
 ### Run - docker ###
 - make sure you have docker installed
 - clone the repo
