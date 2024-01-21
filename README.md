@@ -21,10 +21,8 @@
 - check an option for quantized model, if any is coming soon - could make great difference in speed for cpu systems.
 ### Run - docker ###
 - make sure you have docker installed
-- clone the repo
-- run ```docker build -t <choose image tag:version> .```
-- run ```docker run -p 8080:8080 <image tag:version>`
-- send GET request to ```localhost:8080/generate-sample```(or ```localhost:8080/generate-hq```) endpoint, and add the prompt query param.
+- create a GitHub personal access token, and login to ghcr.io with docker.
+- run ```docker run -p 8080:8080 ghcr.io/benayat/text2image-thin:latest```
 
 ### Run - local ###
 - run the system prep part, according to the instructions above, and your OS and cpu type. 
@@ -33,6 +31,6 @@
 - run ```java -jar target/text2image.jar```
 
 #### NOTES: ####
-- The docker image size will go up to 15GB, because of the stable diffusion model, and the ONNXRuntime-Extensions repo, and that's only a POC.
-- Despite the image size, running on docker is preferred, because of the system prep, and the need to customize the lib/so/dll file for your system, which is not needed on docker.
+- The docker image size is about 6GB, because of the big model files. 
+- Despite the image size, running on docker is preferred, because of the system prep part - which will take twice the size, and at least three time the time.
 - You may change the env variables mentioned in application.yaml file, to customize the image generation, like the provider(cpu/gpu), number of steps, image size, and more.

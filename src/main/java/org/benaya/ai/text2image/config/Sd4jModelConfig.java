@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Configuration
-public class ModelConfig {
+public class Sd4jModelConfig {
     @Value("${text2image.model-path.param-name}")
     private String modelPathParamName;
     @Value("${text2image.model-path.value}")
