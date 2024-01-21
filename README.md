@@ -1,5 +1,5 @@
 ## Text2image ##
-- a spring boot tool for generating images from text
+- a spring boot tool for generating images from text, based on the new oracle stable-diffusion [java implementation](https://github.com/oracle/sd4j).
 - uses a ready-to-use onnx text-tokenizer model to tokenize the text
 - then uses stable-diffusion model to create an image, utilizing the onnx runtime.
 - for cpu usage, I've downgraded some of the params(like the number of steps, and image size) to make it faster.
@@ -17,8 +17,9 @@
 - get the relevant lib file(for windows, it's ortextensions.dll) and copy to the root of this project.
 
 #### Todo: ####
-- add a vector database as a cache layer for the text tokens, and storage database for the images.
+- check an option for quzntized model, if any is comming soon - could make great difference in speed for cpu systems.
 ### Run - docker ###
+- make sure you have docker installed
 - clone the repo
 - run ```docker build -t <choose image tag:version> .```
 - run ```docker run -p 8080:8080 <image tag:version>`
